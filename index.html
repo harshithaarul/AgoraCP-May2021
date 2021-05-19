@@ -14,9 +14,14 @@
         </div>
         <div class="form-container">
             <span>Login and enjoy <span style = "color: #099dfd;">unlimited</span> videocalling</span>
-            <input type="text" id="username" placeholder="Username">
-            <input type="password" id="password" placeholder="Password">
-            <button>Submit</button>
+            <form action="./index.html" onsubmit="return clicky()">
+                <input type="text" id="email" placeholder="email">
+                <span class="warning" id="emailWarning"> Incorrect Email</span>
+                <input type="password" id="password" placeholder="Password">
+                <button id="submitButton">Submit</button>
+                <span class="warning" id="passwordWarning"> Incorrect Password</span>
+            </form>
+
         </div>
     </div>
 
@@ -30,6 +35,31 @@
         <div id="tagline">
             <span>Chat with your <strong>closest friends </strong>no matter how far they are</span>
         </div>
+        <script>
+            document.getElementById("submitButton").onclick =
+
+                function clicky() {
+                    let email = document.getElementById("email").value
+                    let password = document.getElementById("password").value
+
+                    if (email.match(/\S+@\S+/)) {
+                        document.getElementById("email").className = ""
+                        if (password.length >= 8) {
+                            document.getElementById("password").className = ""
+                            return true
+                        } else {
+                            document.getElementById("password").className = "incorrect"
+                            return false
+                        }
+                    } else {
+                        document.getElementById("email").className = "incorrect"
+                        document.getElementById("emailWarning").style = "display:block"
+                        return false
+                    }
+
+                }
+        </script>
+
     </div>
 </body>
 
