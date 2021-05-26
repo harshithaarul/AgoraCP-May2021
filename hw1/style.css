@@ -116,3 +116,33 @@ button:hover {
     display: none;
     font-size: 15px;
 }
+
+.right-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flexContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#SelfStream {
+    margin-top: 150px;
+    justify-self: center;
+    border: 2px solid #099dfd;
+    height: 500px;
+    width: 800px;
+}
+
+#remoteStream {
+    text-align: left;
+    margin-top: 20px;
+    justify-self: center;
+    border: 2px solid #099dfd;
+    height: 250px;
+    width: 400px;
+}

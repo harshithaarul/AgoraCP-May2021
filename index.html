@@ -2,7 +2,7 @@
 
 <head>
     <title> Agora Certificate Program</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&family=Roboto:wght@100&display=swap" rel="stylesheet">
 </head>
@@ -19,7 +19,7 @@
                 <span class="warning" id="emailWarning"> Incorrect Email</span>
                 <input type="password" id="password" placeholder="Password">
                 <button id="submitButton">Submit</button>
-                <span class="warning" id="passwordWarning"> Incorrect Password</span>
+                <span class="warning" id="passwordWarning"> Password must be of at least 8 characters</span>
             </form>
 
         </div>
@@ -44,16 +44,28 @@
 
                     if (email.match(/\S+@\S+/)) {
                         document.getElementById("email").className = ""
+                        document.getElementById("passwordWarning").style = ""
                         if (password.length >= 8) {
                             document.getElementById("password").className = ""
+                            document.getElementById("passwordWarning").style = ""
                             return true
                         } else {
                             document.getElementById("password").className = "incorrect"
+                            document.getElementById("passwordWarning").style = "display:block"
                             return false
+
                         }
                     } else {
                         document.getElementById("email").className = "incorrect"
                         document.getElementById("emailWarning").style = "display:block"
+                        if (password.length >= 8) {
+                            document.getElementById("password").className = ""
+                            document.getElementById("passwordWarning").style = ""
+                        } else {
+                            document.getElementById("password").className = "incorrect"
+                            document.getElementById("passwordWarning").style = "display:block"
+                        }
+
                         return false
                     }
 
