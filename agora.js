@@ -41,9 +41,9 @@ function addVideoStream(streamId) {
 
 }
 
-document.getElementById("join").onclick = function() {
-    let channelName = document.getElementById("channelName").value;
-    let username = document.getElementById("username").value;
+function join(channelName) {
+    // channelName = document.getElementById("channelName").value;
+    let username = Math.random().toString(36);
     console.log(username, channelName);
     client.join(null, channelName, username, () => {
         var localStream = AgoraRTC.createStream({
@@ -77,13 +77,15 @@ document.getElementById("join").onclick = function() {
             removeVideoStream(evt);
         });
 }
-document.getElementById("leave").onclick = async function() {
 
-    var child;
-    while (child = document.getElementById("SelfStream").firstChild)
-        document.getElementById("SelfStream").removeChild(child)
-    await client.leave();
-}
+
+// document.getElementById("leave").onclick = async function() {
+
+//     var child;
+//     while (child = document.getElementById("SelfStream").firstChild)
+//         document.getElementById("SelfStream").removeChild(child)
+//     await client.leave();
+// }
 
 async function leaveCall() {
     // Destroy the local audio and video tracks.
@@ -111,9 +113,14 @@ document.getElementById("video-mute").onclick = function() {
     }
 }
 
-document.getElementById("leave").onclick = function() {
-    client.leave(function() {
-        console.log("User left!");
-    }, handlefail)
-    removeMyVideoStream();
-}
+// document.getElementById("leave").onclick = function() {
+//     client.leave(function() {
+//         console.log("User left!");
+//     }, handlefail)
+//     removeMyVideoStream();
+// }
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const roomid = urlParams.get("roomid");
+join(roomid);
