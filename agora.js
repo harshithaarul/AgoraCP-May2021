@@ -110,6 +110,7 @@ function join(channelName, name) {
                 } else {
                     otherUser = stream.getId();
                     document.getElementById("abvid").innerHTML = otherUser + "'s video";
+                    document.getElementById("abss").innerHTML = otherUser + "'s screen";
                     addVideoStream(stream.getId());
                 }
                 stream.play(stream.getId());
