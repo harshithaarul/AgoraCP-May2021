@@ -7,35 +7,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&family=Roboto:wght@100&display=swap" rel="stylesheet">
 </head>
 
-<body style="margin: 0px">
-    <div class="left-pane">
-        <div class="image-container">
+<body style="margin: 250px">
+    <div class="right-container">
+        <div>
             <img src="assets/agoraLogo.png" alt="Agora Logo Blue">
         </div>
         <div class="form-container">
-            <span>Login and enjoy <span style = "color: #099dfd;">unlimited</span> videocalling</span>
-            <input type="text" id="roomid" placeholder="Room ID">
-            <button id="submitButton" type="submit">Submit</button>
-
-        </div>
-    </div>
-
-    <div class="right-pane">
-        <div class="illustration-container">
-            <div class="illustration-img-container">
-                <img id="illustration" src="assets/Video_Conf.svg">
+            <div>
+                <span>Login to join  <span style = "color: #7d9b5d">your accountability buddy</span><br> and get some work done!</span>
             </div>
+            <div>
+                <input type="text" id="name" placeholder="Username">
+            </div>
+            <div><input type="text" id="roomid" placeholder="Call ID"></div>
+
+            <button id="submitButton" type="submit">Join Call</button>
 
         </div>
-        <div id="tagline">
-            <span>Chat with your <strong>closest friends </strong>no matter how far they are</span>
-        </div>
+        <!-- </div>
+
+    <div class="right-pane"> -->
+
         <script>
             document.getElementById("submitButton").onclick =
 
                 function clicky() {
                     let roomid = document.getElementById("roomid").value
-                    window.location = "videoCall.html?roomid=" + roomid;
+                    let name = document.getElementById("name").value
+                    window.location = "videoCall.html?name=" + name + "&roomid=" + roomid;
                 }
         </script>
 

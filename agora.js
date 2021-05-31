@@ -4,10 +4,19 @@ let handlefail = function(err) {
 
 let appId = "1e45a301170e46239ad8c61e9a76b601";
 let globalStream;
+let username;
+let otherUser;
+let globalStreamScreen;
 var isAudioMuted = false;
 var isVideoMuted = false;
+var isScreenMuted = false;
 
 let client = AgoraRTC.createClient({
+    mode: "live",
+    codec: "h264"
+})
+
+let clientScreen = AgoraRTC.createClient({
     mode: "live",
     codec: "h264"
 })
@@ -18,6 +27,8 @@ let client = AgoraRTC.createClient({
 // })
 
 client.init(appId, () => console.log("Client Connected."), handlefail)
+clientScreen.init(appId, () => console.log("Client Connected."), handlefail)
+
 
 function removeMyVideo() {
     globalStream.stop();
@@ -38,14 +49,24 @@ function addVideoStream(streamId) {
     streamDiv.id = streamId;
     streamDiv.style.height = "250px";
     remoteContainer.appendChild(streamDiv);
-
 }
 
-function join(channelName) {
+function addScreenStream(streamId) {
+    console.log("Stream to be added is: ", streamId);
+    let remoteContainer = document.getElementById("remoteScreen");
+    let streamDiv = document.createElement("div");
+    streamDiv.id = streamId;
+    streamDiv.style.height = "250px";
+    remoteContainer.appendChild(streamDiv);
+}
+
+function join(channelName, name) {
     // channelName = document.getElementById("channelName").value;
-    let username = Math.random().toString(36);
+    // username = Math.random().toString(36);
+    username = name;
     console.log(username, channelName);
-    client.join(null, channelName, username, () => {
+    client.join(appId, channelName, username, () => {
+        console.log("HERE");
         var localStream = AgoraRTC.createStream({
             video: true,
             audio: true
@@ -55,6 +76,20 @@ function join(channelName) {
             client.publish(localStream);
         })
         globalStream = localStream;
+    })
+    console.log("starting screen")
+    clientScreen.join(appId, channelName, (username + "_screen"), () => {
+        console.log("starting screen")
+        var localStream = AgoraRTC.createStream({
+            video: false,
+            audio: false,
+            screen: true
+        })
+        localStream.init(function() {
+            localStream.play("SelfScreen");
+            clientScreen.publish(localStream);
+        })
+        globalStreamScreen = localStream;
     })
 
     client.on("stream-added",
@@ -67,8 +102,18 @@ function join(channelName) {
         function(evt) {
             console.log("Stream subscribed.");
             let stream = evt.stream;
-            addVideoStream(stream.getId());
-            stream.play(stream.getId());
+            if (!stream.getId().includes(username)) {
+
+                if (stream.getId().includes("_screen")) {
+                    document.getElementById("abss").innerHTML = otherUser + "'s screen";
+                    addScreenStream(stream.getId())
+                } else {
+                    otherUser = stream.getId();
+                    document.getElementById("abvid").innerHTML = otherUser + "'s video";
+                    addVideoStream(stream.getId());
+                }
+                stream.play(stream.getId());
+            }
         });
 
     client.on("peer-leave",
@@ -76,16 +121,25 @@ function join(channelName) {
             console.log("Peer has left stream");
             removeVideoStream(evt);
         });
+
+    clientScreen.on("peer-leave",
+        function(evt) {
+            console.log("Peer has left stream");
+            removeVideoStream(evt);
+        });
 }
 
 
-// document.getElementById("leave").onclick = async function() {
+document.getElementById("leaveButton").onclick = async function() {
 
-//     var child;
-//     while (child = document.getElementById("SelfStream").firstChild)
-//         document.getElementById("SelfStream").removeChild(child)
-//     await client.leave();
-// }
+    var child;
+    while (child = document.getElementById("SelfStream").firstChild)
+        document.getElementById("SelfStream").removeChild(child)
+    while (child = document.getElementById("SelfScreen").firstChild)
+        document.getElementById("SelfScreen").removeChild(child)
+    await client.leave();
+    await clientScreen.leave();
+}
 
 async function leaveCall() {
     // Destroy the local audio and video tracks.
@@ -113,6 +167,26 @@ document.getElementById("video-mute").onclick = function() {
     }
 }
 
+document.getElementById("audio-mute").onclick = function() {
+    if (!isAudioMuted) {
+        globalStream.muteAudio();
+        isAudioMuted = true;
+    } else {
+        globalStream.unmuteAudio();
+        isAudioMuted = false;
+    }
+}
+
+document.getElementById("screenshare-mute").onclick = function() {
+    if (!isScreenMuted) {
+        globalStreamScreen.muteVideo();
+        isScreenMuted = true;
+    } else {
+        globalStreamScreen.unmuteVideo();
+        isScreenMuted = false;
+    }
+}
+
 // document.getElementById("leave").onclick = function() {
 //     client.leave(function() {
 //         console.log("User left!");
@@ -123,4 +197,5 @@ document.getElementById("video-mute").onclick = function() {
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const roomid = urlParams.get("roomid");
-join(roomid);
+const name = urlParams.get("name");
+join(roomid, name);

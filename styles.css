@@ -6,6 +6,36 @@ body {
     background-size: cover;
 }
 
+.form-container {
+    padding-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+#submitButton {
+    background-color: #4f6137;
+    margin-top: 10px;
+    padding: 5px;
+    color: white;
+    font-size: 1.25rem;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#leaveButton {
+    background-color: #4f6137;
+    margin-top: 10px;
+    padding: 5px;
+    color: white;
+    font-size: 1.25rem;
+    border-radius: 5px;
+    width: 800px;
+}
+
 #container {
     background-color: #099dfd;
 }
@@ -37,10 +67,6 @@ body {
     font-size: 1.5rem;
 }
 
-#highlighted {
-    color: #099dfd;
-}
-
 #email {
     margin-top: 20px;
 }
@@ -48,33 +74,16 @@ body {
 input {
     margin-top: 10px;
     padding: 5px;
-    width: 90%;
+    /* width: 30%; */
     font-size: 1.25rem;
-    border: 2px solid #099dfd;
+    border: 2px solid #7d9b5d;
+    color: #4f6137;
     border-radius: 5px;
-}
-
-.submitButton {
-    background-color: #099dfd;
-    margin-top: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-right: 15px;
-    padding-left: 15px;
-    color: white;
-    border: none;
-    font-size: 1.25rem;
-    border-radius: 10px;
 }
 
 #flexContainer {
     display: flex;
     flex-direction: row;
-}
-
-#right-pane {
-    flex: 1;
-    text-align: center;
 }
 
 #circleContainer {
@@ -119,11 +128,6 @@ input {
 }
 
 #SelfStream {
-    /* margin-top: 150px;
-    justify-self: center;
-    border: 2px solid #099dfd;
-    width: 800px;
-    height: 500px; */
     text-align: left;
     margin-top: 20px;
     justify-self: center;
@@ -142,11 +146,6 @@ input {
 }
 
 #SelfScreen {
-    /* margin-top: 150px;
-    justify-self: center;
-    border: 2px solid #099dfd;
-    width: 800px;
-    height: 500px; */
     text-align: left;
     margin-top: 20px;
     justify-self: center;
