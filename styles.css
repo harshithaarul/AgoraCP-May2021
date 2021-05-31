@@ -233,11 +233,17 @@ input {
 }
 
 #SelfStream {
-    margin-top: 150px;
+    /* margin-top: 150px;
     justify-self: center;
     border: 2px solid #099dfd;
     width: 800px;
-    height: 500px;
+    height: 500px; */
+    text-align: left;
+    margin-top: 20px;
+    justify-self: center;
+    border: 2px solid #099dfd;
+    width: 400px;
+    height: 250px;
 }
 
 #remoteStream {
@@ -258,7 +264,7 @@ input {
     margin-top: 30px;
     margin-bottom: 0px;
     height: 100px;
-    width: 600px;
+    width: 800px;
     background: white;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
@@ -270,4 +276,8 @@ input {
     width: 50px;
     margin: 20px;
     cursor: pointer;
+}
+
+.text {
+    text-align: center;
 }

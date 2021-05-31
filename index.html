@@ -14,13 +14,8 @@
         </div>
         <div class="form-container">
             <span>Login and enjoy <span style = "color: #099dfd;">unlimited</span> videocalling</span>
-            <form action="./index.html" onsubmit="return clicky()">
-                <input type="text" id="email" placeholder="email">
-                <span class="warning" id="emailWarning"> Incorrect Email</span>
-                <input type="password" id="password" placeholder="Password">
-                <button id="submitButton">Submit</button>
-                <span class="warning" id="passwordWarning"> Password must be of at least 8 characters</span>
-            </form>
+            <input type="text" id="roomid" placeholder="Room ID">
+            <button id="submitButton" type="submit">Submit</button>
 
         </div>
     </div>
@@ -39,36 +34,8 @@
             document.getElementById("submitButton").onclick =
 
                 function clicky() {
-                    let email = document.getElementById("email").value
-                    let password = document.getElementById("password").value
-
-                    if (email.match(/\S+@\S+/)) {
-                        document.getElementById("email").className = ""
-                        document.getElementById("passwordWarning").style = ""
-                        if (password.length >= 8) {
-                            document.getElementById("password").className = ""
-                            document.getElementById("passwordWarning").style = ""
-                            return true
-                        } else {
-                            document.getElementById("password").className = "incorrect"
-                            document.getElementById("passwordWarning").style = "display:block"
-                            return false
-
-                        }
-                    } else {
-                        document.getElementById("email").className = "incorrect"
-                        document.getElementById("emailWarning").style = "display:block"
-                        if (password.length >= 8) {
-                            document.getElementById("password").className = ""
-                            document.getElementById("passwordWarning").style = ""
-                        } else {
-                            document.getElementById("password").className = "incorrect"
-                            document.getElementById("passwordWarning").style = "display:block"
-                        }
-
-                        return false
-                    }
-
+                    let roomid = document.getElementById("roomid").value
+                    window.location = "videoCall.html?roomid=" + roomid;
                 }
         </script>
 

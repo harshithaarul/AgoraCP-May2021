@@ -14,31 +14,42 @@
 </head>
 
 <body>
-    <div class="flexContainer">
-        <div class="left-pane">
-            <div class="logoSmall">
-                <img src="assets/agoraLogo.png" alt="" class="logoElement">
-            </div>
-            <span class="headingText">Join a Call!            </span>
-            <input type="text" id="username" placeholder="Username" />
-            <input type="text" id="channelName" placeholder="Channel Name" />
-            <button class="submitButton" id="join"> Join</button>
-            <button class="submitButton" id="leave" style="background-color:  rgb(212, 71, 71);"> Leave</button>
-        </div>
+    <div>
         <div class="right-container">
-            <div class="right-pane">
-                <div id="SelfStream"> </div>
-                <div id="remoteStream"> </div>
-                <div class="controls">
-                    <div class="icon" id="video-mute">
-                        <i class="fa fa-video-slash fa-2x" style="color: #099dfd;"></i>
-                    </div>
-                    <div class="icon" id="audio-mute">
-                        <i class="fa fa-microphone-slash fa-2x" style="color: #099dfd;"></i>
-                    </div>
+            <h1>Welcome to your productive work session!</h1>
+            <div class="flexContainer">
+                <div>
+                    <p class="text">My Video</p>
+                    <div id="SelfStream"> </div>
+                </div>
+
+                <div>
+                    <p class="text"> My Screenshare</p>
+                    <div id="SelfStream"> </div>
+
                 </div>
 
             </div>
+            <div class="flexContainer">
+                <div>
+                    <p class="text">Accountability Buddy's Video</p>
+                    <div id="remoteStream"> </div>
+                </div>
+                <div>
+                    <p class="text">Accountability Buddy's Screenshare</p>
+                    <div id="remoteStream"> </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="icon" id="video-mute">
+                    <i class="fa fa-video-slash fa-2x" style="color: #099dfd;"></i>
+                </div>
+                <div class="icon" id="audio-mute">
+                    <i class="fa fa-microphone-slash fa-2x" style="color: #099dfd;"></i>
+                </div>
+            </div>
+
         </div>
     </div>
     <script src="https://cdn.agora.io/sdk/release/AgoraRTCSDK-3.0.0.js"></script>
